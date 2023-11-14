@@ -22,12 +22,13 @@ services:
     build:
       context: .
       dockerfile: newman.Dockerfile
+    entrypoint: [""]
     volumes:
-      - ./postman:/etc/newman
+      - ./newman/:/etc/newman
     networks:
-      - api-testing-network
-    entrypoint:
-      newman run collection.json -e docker.environment.json -r html,cli --reporter-html-export reports/report.html
+      - api-testing-network    
+    command: >
+      newman run collection.json -e docker.environment.json -k -r htmlextra --reporter-htmlextra-export newman/reports.html
 
 networks:
   api-testing-network:

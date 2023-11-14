@@ -36,6 +36,7 @@ router.get('/welcome', function (req, res, next) {
 
 router.post('/posts', function (req, res, next) {
   const { title, body } = req.body;
+  console.log({ title, body });
   POSTS.push({ title, body });
   res.render('posts', { title: 'Posts', posts: POSTS });
 });
